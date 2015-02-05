@@ -15,5 +15,5 @@ For more help see the Apache Camel documentation
 
 Run configuration on IDEA
 
-![Alt text](/Query2CSVRun.png?raw=true "IDEA run configuration")
+![Alt text](https://github.com/arunma/Query2CSVCamel/blob/master/Query2CSVRun.png "IDEA run configuration")
 
