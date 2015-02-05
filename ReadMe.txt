@@ -13,3 +13,7 @@ For more help see the Apache Camel documentation
 
     http://camel.apache.org/
 
+Run configuration on IDEA
+
+![Alt text](/Query2CSVRun.png?raw=true "IDEA run configuration")
+
