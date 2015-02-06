@@ -31,14 +31,17 @@
                 <constant>select * from evaluation.USERS</constant>
             </setBody>
             <to uri="jdbc:dataSource"/>
-            <!--<to uri="direct:writeHeaders"/>-->
-            <marshal>
-                <csv delimiter="|"/>
-            </marshal>
-            <wireTap uri="log:com.arunma?level=DEBUG" />
-            <to uri="file:output/csv/?fileName=output.csv"/>
+            <to uri="direct:generateCSV"/>
         </camel:route>
 
+        <camel:route>
+        <from uri="direct:generateCSV"/>
+        <multicast >
+            <recipientList>
+                <simple>direct:writeHeaders,direct:writeData</simple>
+            </recipientList>
+        </multicast>
+        </camel:route>
 
         <camel:route>
             <from uri="direct:writeHeaders"/>
@@ -51,6 +54,18 @@
             </marshal>
             <to uri="file:output/csv/?fileName=output.csv"/>
         </camel:route>
+
+
+        <camel:route>
+            <from uri="direct:writeData"/>
+            <marshal>
+                <csv delimiter="|" skipFirstLine="true"/>
+            </marshal>
+            <wireTap uri="log:com.arunma?level=DEBUG" />
+            <to uri="file:output/csv/?fileName=output.csv&amp;fileExist=Append"/>
+        </camel:route>
+
+
 
 
     </camel:camelContext>
